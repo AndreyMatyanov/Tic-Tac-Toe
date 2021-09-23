@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tic_Tac_Toe
 {
-    class Options
+    public class Options
     {
         private readonly int n;
         private readonly bool twoPlayers;
