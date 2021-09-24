@@ -26,13 +26,14 @@ namespace Tic_Tac_Toe
 
         public static bool IsVersusPlayes()
         {
-            Console.WriteLine("Выбор: \n1. Против игрока.\n2.Против бота.");
+            Console.WriteLine("Выбор: \n1. Против игрока.\n2. Против бота.\n3. Рандомно.");
             int i = Convert.ToInt32(Console.ReadLine());
             bool twoPlayers = i switch
             {
                 1 => true,
                 2 => false,
-                _ => throw new ArgumentException("Выбор между 1 и 2!"),
+                3 => (new Random()).Next(100) < 50,
+                _ => throw new ArgumentException("Неверные данные.")
             };
             Console.Clear();
             return twoPlayers;
@@ -52,7 +53,7 @@ namespace Tic_Tac_Toe
             return paint;
         }
 
-        static bool IsFirstPlayerStart()
+        public static bool IsFirstPlayerStart()
         {
             Console.WriteLine("Кто ходит первым:\n1. Игрок 1.\n2. Игрок 2/бот.");
             int i = Convert.ToInt32(Console.ReadLine());

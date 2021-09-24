@@ -20,11 +20,25 @@ namespace Tic_Tac_Toe
                 }
                 else if (options.FirstPlayersIsStart is true && steps % 2 != 0)
                 {
-                    SecondPlayerSteps(ref board, options.PaintOfTheSecondPlayer);
+                    if (options.TwoPlayers is false)
+                    {
+                        BotSteps(ref board, options.PaintOfTheSecondPlayer);
+                    }
+                    else
+                    {
+                        SecondPlayerSteps(ref board, options.PaintOfTheSecondPlayer);
+                    }
                 }
                 else if (options.FirstPlayersIsStart is false && steps % 2 == 0)
                 {
-                    SecondPlayerSteps(ref board, options.PaintOfTheSecondPlayer);
+                    if (options.TwoPlayers is false)
+                    {
+                        BotSteps(ref board, options.PaintOfTheSecondPlayer);
+                    }
+                    else
+                    {
+                        SecondPlayerSteps(ref board, options.PaintOfTheSecondPlayer);
+                    }
                 }
                 else
                 {
@@ -66,6 +80,19 @@ namespace Tic_Tac_Toe
             {
                 throw new ArgumentException("На этой позиции уже поставлен значок.");
             }
+        }
+
+        static void BotSteps(ref char[,] board, char paint)
+        {
+            int x, y;
+            Random rnd = new Random();
+            do
+            {
+                x = rnd.Next(board.GetLength(0));
+                y = rnd.Next(board.GetLength(0));
+            }
+            while (board[x, y] == 'O' || board[x, y] == 'X');
+            board[x, y] = paint;
         }
 
         private static void ShowBoard(char[,] board)
