@@ -46,39 +46,62 @@ namespace Tic_Tac_Toe
                 }
                 Console.Clear();
             }
+            ShowBoard(board);
             Score(board, options);
         }
 
         private static void FirstPlayerSteps(ref char[,] board, char paint)
         {
-            Console.WriteLine("Ход игрока 1.\nВведите позицию по длине:");
-            int y = Convert.ToInt32(Console.ReadLine()) - 1;
-            Console.WriteLine("Введите позицию по высоте");
-            int x = Convert.ToInt32(Console.ReadLine()) - 1;
-            if (board[x, y] != 'X' && board[x, y] != 'O')
-            {
-                board[x, y] = paint;
+            try
+            { 
+                Console.WriteLine("Ход игрока 1.\nВведите позицию по длине:");
+                int y = Convert.ToInt32(Console.ReadLine()) - 1;
+                Console.WriteLine("Введите позицию по высоте");
+                int x = Convert.ToInt32(Console.ReadLine()) - 1;
+                if (board[x, y] != 'X' && board[x, y] != 'O')
+                {
+                    board[x, y] = paint;
+                }
+                else
+                {
+                    throw new ArgumentException("На этой позиции уже поставлен значок.");
+                }
             }
-            else
+            catch(Exception e)
             {
-                throw new ArgumentException("На этой позиции уже поставлен значок.");
+                Console.Clear();
+                ShowBoard(board);
+                Console.WriteLine(e.Message);
+                FirstPlayerSteps(ref board, paint);
             }
 
         }
 
         static void SecondPlayerSteps(ref char[,] board, char paint)
         {
-            Console.WriteLine("Ход игрока 2.\nВведите позицию по длине:");
-            int y = Convert.ToInt32(Console.ReadLine()) - 1;
-            Console.WriteLine("Введите позицию по высоте");
-            int x = Convert.ToInt32(Console.ReadLine()) - 1;
-            if (board[x, y] != 'X' && board[x, y] != 'O')
+            try
             {
-                board[x, y] = paint;
+                Console.WriteLine("Ход игрока 2.\nВведите позицию по длине:");
+                int y = Convert.ToInt32(Console.ReadLine()) - 1;
+
+                Console.WriteLine("Введите позицию по высоте");
+                int x = Convert.ToInt32(Console.ReadLine()) - 1;
+
+                if (board[x, y] != 'X' && board[x, y] != 'O')
+                {
+                    board[x, y] = paint;
+                }
+                else
+                {
+                    throw new ArgumentException("На этой позиции уже поставлен значок.");
+                }
             }
-            else
+            catch(Exception e)
             {
-                throw new ArgumentException("На этой позиции уже поставлен значок.");
+                Console.Clear();
+                ShowBoard(board);
+                Console.WriteLine(e.Message);
+                SecondPlayerSteps(ref board, paint);
             }
         }
 

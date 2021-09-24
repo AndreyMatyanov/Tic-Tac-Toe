@@ -20,36 +20,57 @@ namespace Tic_Tac_Toe
         }
         static void WriteWhoIsAWinner(int countOfCross, int countOfZero, Options options)
         {
-            if(options.PaintOfTheFirstPlayer == 'O')
+            string BotWinMessage = "Бот победил.";
+            string FirstPlayerWin = "Первый игрок - победитель.";
+            string SecondPlayerWin = "Второй игрок - победитель.";
+            string FirstZeroSecondCross = $"Первый игрок: {countOfZero} очков.\nВторой игрок/бот: {countOfCross} очков.";
+            string FirstCrossSecondZero = $"Первый игрок: {countOfCross} очков.\nВторой игры: {countOfZero} очков.";
+            string Nobody = "Ничья.";
+
+            if (options.PaintOfTheFirstPlayer == 'O')
             {
-                Console.WriteLine($"Первый игрок: {countOfZero} очков.\nВторой игры: {countOfCross} очков.");
+                Console.WriteLine(FirstZeroSecondCross);
                 if (countOfZero > countOfCross)
                 {
-                    Console.WriteLine("Первый игрок - победитель.");
+                    Console.WriteLine(FirstPlayerWin);
                 }
                 else if (countOfZero < countOfCross)
                 {
-                    Console.WriteLine("Второй игрок - победитель.");
+                    if (options.TwoPlayers is false)
+                    {
+                        Console.WriteLine(BotWinMessage);
+                    }
+                    else
+                    {
+                        Console.WriteLine(SecondPlayerWin);
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Ничья.");
+                    Console.WriteLine(Nobody);
                 }
             }
             else
             {
-                Console.WriteLine($"Первый игрок: {countOfCross} очков.\nВторой игры: {countOfZero} очков.");
+                Console.WriteLine(FirstCrossSecondZero);
                 if (countOfZero < countOfCross)
                 {
-                    Console.WriteLine("Первый игрок - победитель.");
+                    Console.WriteLine(FirstPlayerWin);
                 }
                 else if (countOfZero > countOfCross)
                 {
-                    Console.WriteLine("Второй игрок - победитель.");
+                    if (options.TwoPlayers is false)
+                    {
+                        Console.WriteLine(BotWinMessage);
+                    }
+                    else
+                    {
+                        Console.WriteLine(SecondPlayerWin);
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Ничья.");
+                    Console.WriteLine(Nobody);
                 }
             }
         }
@@ -243,7 +264,6 @@ namespace Tic_Tac_Toe
                     {
                         tempCountZero = 0;
                         countOfZero++;
-                        Console.WriteLine("ОГО");
                     }
                     else if (board[x, y] == 'O')
                     {
