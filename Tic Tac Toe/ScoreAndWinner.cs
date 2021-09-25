@@ -7,18 +7,16 @@ namespace Tic_Tac_Toe
     static class ScoreAndWinner
     {
 
-        public static void Score(char[,] board, Options options)
+        public static void Score(char[,] board, ref int countOfCross, ref int countOfZero)
         {
-            int countOfCross = 0;
-            int countOfZero = 0;
-
+            countOfCross = 0;
+            countOfZero = 0;
             PointHorizontal(ref countOfZero, ref countOfCross, board);
             PointVertical(ref countOfZero, ref countOfCross, board);
             PointDiagonalRightLeft(ref countOfZero, ref countOfCross, board);
             PointDiagonalLeftRight(ref countOfZero, ref countOfCross, board);
-            WriteWhoIsAWinner(countOfCross, countOfZero, options);
         }
-        static void WriteWhoIsAWinner(int countOfCross, int countOfZero, Options options)
+        public static void WriteWhoIsAWinner(int countOfCross, int countOfZero, Options options)
         {
             string BotWinMessage = "Бот победил.";
             string FirstPlayerWin = "Первый игрок - победитель.";
