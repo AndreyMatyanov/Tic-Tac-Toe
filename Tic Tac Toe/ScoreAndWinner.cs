@@ -21,13 +21,10 @@ namespace Tic_Tac_Toe
             string BotWinMessage = "Бот победил.";
             string FirstPlayerWin = "Первый игрок - победитель.";
             string SecondPlayerWin = "Второй игрок - победитель.";
-            string FirstZeroSecondCross = $"Первый игрок: {countOfZero} очков.\nВторой игрок/бот: {countOfCross} очков.";
-            string FirstCrossSecondZero = $"Первый игрок: {countOfCross} очков.\nВторой игры: {countOfZero} очков.";
             string Nobody = "Ничья.";
 
             if (options.PaintOfTheFirstPlayer == 'O')
             {
-                Console.WriteLine(FirstZeroSecondCross);
                 if (countOfZero > countOfCross)
                 {
                     Console.WriteLine(FirstPlayerWin);
@@ -50,7 +47,6 @@ namespace Tic_Tac_Toe
             }
             else
             {
-                Console.WriteLine(FirstCrossSecondZero);
                 if (countOfZero < countOfCross)
                 {
                     Console.WriteLine(FirstPlayerWin);

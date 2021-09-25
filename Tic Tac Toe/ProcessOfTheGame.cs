@@ -9,18 +9,24 @@ namespace Tic_Tac_Toe
     {
         public static void GameStart(Options options)
         {
-            int x = 0;
             int y = 0;
+            int x = 0;
             int countOfZero = 0;
             int countOfCross = 0;
 
             char[,] board = new char[options.N, options.N];
             FillBoard(ref board);
+            StepsFirstOrSecondPlayer(options, ref x, ref y, ref board, ref countOfCross, ref countOfZero);
+            ShowBoard(board);
+            WriteWhoIsAWinner(countOfCross, countOfZero, options);
+        }
+
+        static void StepsFirstOrSecondPlayer(Options options, ref int x,ref int y, ref char[,] board, ref int countOfCross,ref int countOfZero )
+        {
             for (int steps = 0; steps < (options.N * options.N) - 1; steps++)
             {
-                if ((countOfCross == countOfZero * 3 && countOfZero != 0) || (countOfZero == countOfCross * 3 && countOfCross != 0))
+                if ((countOfCross == countOfZero * board.GetLength(0) - 1 && countOfZero != 0) || (countOfZero == countOfCross * board.GetLength(0) - 1 && countOfCross != 0))
                 {
-                    WriteWhoIsAWinner(countOfCross, countOfZero, options);
                     break;
                 }
 
@@ -57,62 +63,76 @@ namespace Tic_Tac_Toe
                 Score(board, ref countOfCross, ref countOfZero);
                 Console.Clear();
             }
-            ShowBoard(board);
-            WriteWhoIsAWinner(countOfCross, countOfZero, options);
         }
 
         static void Step(ref char[,] board, char paint, ref int x, ref int y, string message)
         {
-            ConsoleKeyInfo key;
-            do
+            try
             {
-                ShowBoard(board, x, y);
-                Console.WriteLine(message);
-                key = Console.ReadKey(true);
-                switch (key.Key)
+                ConsoleKeyInfo key;
+                do
                 {
-                    case ConsoleKey.DownArrow:
-                        {
-                            if (y < board.GetLength(0) - 1)
+                    ShowBoard(board, x, y);
+                    Console.WriteLine(message);
+                    key = Console.ReadKey(true);
+                    switch (key.Key)
+                    {
+                        case ConsoleKey.DownArrow:
                             {
-                                y++;
+                                if (y < board.GetLength(0) - 1)
+                                {
+                                    y++;
+                                }
+                                ShowBoard(board, x, y);
+                                break;
                             }
-                            ShowBoard(board, x, y);
-                            break;
-                        }
-                    case ConsoleKey.UpArrow:
-                        if (y > 0)
-                        {
-                            y--;
-                        }
-                        break;
-                    case ConsoleKey.LeftArrow:
-                        {
-                            if (x > 0)
+                        case ConsoleKey.UpArrow:
+                            if (y > 0)
                             {
-                                x--;
-                            }
-                        }
-                        break;
-                    case ConsoleKey.RightArrow:
-                        {
-                            if (x < board.GetLength(0) - 1)
-                            {
-                                x++;
+                                y--;
                             }
                             break;
-                        }
-                    case ConsoleKey.Enter:
-                        {
-                            board[y, x] = paint;
-                            return;
-                        }
-                    default:
-                        break;
+                        case ConsoleKey.LeftArrow:
+                            {
+                                if (x > 0)
+                                {
+                                    x--;
+                                }
+                            }
+                            break;
+                        case ConsoleKey.RightArrow:
+                            {
+                                if (x < board.GetLength(0) - 1)
+                                {
+                                    x++;
+                                }
+                                break;
+                            }
+                        case ConsoleKey.Enter:
+                            {
+                                if (board[y, x] != 'X' && board[y, x] != 'O')
+                                {
+                                    board[y, x] = paint;
+                                    return;
+                                }
+                                else
+                                {
+                                    throw new ArgumentException("На этой позиции уже поставлен значок.");
+                                }
+                            }
+                        default:
+                            break;
+                    }
+                    Console.Clear();
                 }
-                Console.Clear();
+                while (true);
             }
-            while (true);
+            catch(Exception e)
+            {
+                Console.Clear();
+                Console.WriteLine(e.Message);
+                Step(ref board, paint, ref x, ref y, message);
+            }
         }
 
         static void BotSteps(ref char[,] board, char paint)
@@ -134,9 +154,9 @@ namespace Tic_Tac_Toe
             {
                 for (int j = 0; j < board.GetLength(0); j++)
                 {
-                    Console.Write($"{board[i, j]}");
+                    Console.Write($"{board[i, j]}\t");
                 }
-                Console.WriteLine();
+                Console.WriteLine("\n\n");
             }
         }
 
