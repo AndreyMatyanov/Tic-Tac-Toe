@@ -9,8 +9,8 @@ namespace Tic_Tac_Toe
     {
         public static void GameStart(Options options)
         {
-            int y = 0;
             int x = 0;
+            int y = 0;
             int countOfZero = 0;
             int countOfCross = 0;
 
