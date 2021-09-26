@@ -8,10 +8,14 @@ namespace Tic_Tac_Toe
     {
         public static Options SetOptions()
         {
-            return new Options(CountOfSide(), IsVersusPlayes(), PaintOfTheFirstPlayes(), IsFirstPlayerStart());
+            var lengthOfSide = GetLengthOfSide();
+            var versusPlayer = IsVersusPlayer();
+            var paintOfTheFirstPlayer = PaintOfTheFirstPlayer();
+            var firstPlayerStart = IsFirstPlayerStart();
+            return new Options(lengthOfSide, versusPlayer, paintOfTheFirstPlayer, firstPlayerStart);
         }
 
-        public static int CountOfSide()
+        public static int GetLengthOfSide()
         {
             try
             {
@@ -26,15 +30,18 @@ namespace Tic_Tac_Toe
             }
             catch
             {
-                return CountOfSide();
+                return GetLengthOfSide();
             }
         }
 
-        public static bool IsVersusPlayes()
+        public static bool IsVersusPlayer()
         {
             try
             {
-                Console.WriteLine("Выбор: \n1. Против игрока.\n2. Против бота.\n3. Рандомно.");
+                Console.WriteLine("Выбор: \n" +
+                    "1. Против игрока.\n" +
+                    "2. Против бота.\n" +
+                    "3. Рандомно.");
                 int i = Convert.ToInt32(Console.ReadLine());
                 Console.Clear();
                 bool twoPlayers = i switch
@@ -48,15 +55,17 @@ namespace Tic_Tac_Toe
             }
             catch
             {
-                return IsVersusPlayes();
+                return IsVersusPlayer();
             }
         }
 
-        public static char PaintOfTheFirstPlayes()
+        public static char PaintOfTheFirstPlayer()
         {
             try
             {
-                Console.WriteLine("Выберите чем ходит Игрок 1 - крестик или нолик:\n1. Крестик.\n2. Нолик.");
+                Console.WriteLine("Выберите чем ходит Игрок 1 - крестик или нолик:\n" +
+                    "1. Крестик.\n" +
+                    "2. Нолик.");
                 int i = Convert.ToInt32(Console.ReadLine());
                 Console.Clear();
                 char paint = i switch
@@ -70,7 +79,7 @@ namespace Tic_Tac_Toe
             catch
             {
                 Console.Clear();
-                return PaintOfTheFirstPlayes();
+                return PaintOfTheFirstPlayer();
             }
         }
 
@@ -78,7 +87,10 @@ namespace Tic_Tac_Toe
         {
             try
             {
-                Console.WriteLine("Кто ходит первым:\n1. Игрок 1.\n2. Игрок 2/бот.");
+                Console.WriteLine("Кто ходит первым:\n" +
+                    "1. Игрок 1.\n" +
+                    "2. Игрок 2/бот.");
+
                 int i = Convert.ToInt32(Console.ReadLine());
                 Console.Clear();
                 bool firstPlayerIsStart = i switch
