@@ -7,68 +7,68 @@ namespace Tic_Tac_Toe
     static class ScoreAndWinner
     {
 
-        public static void Score(char[,] board, ref int countOfCross, ref int countOfZero)
+        public static void Score(
+            char[,] board, 
+            ref int countOfCross, 
+            ref int countOfZero)
         {
             countOfCross = 0;
             countOfZero = 0;
-            PointHorizontal(ref countOfZero, ref countOfCross, board);
-            PointVertical(ref countOfZero, ref countOfCross, board);
-            PointDiagonalRightLeft(ref countOfZero, ref countOfCross, board);
-            PointDiagonalLeftRight(ref countOfZero, ref countOfCross, board);
-        }
-        public static void WriteWhoIsAWinner(int countOfCross, int countOfZero, Options options)
-        {
-            string BotWinMessage = "Бот победил.";
-            string FirstPlayerWin = "Первый игрок - победитель.";
-            string SecondPlayerWin = "Второй игрок - победитель.";
-            string Nobody = "Ничья.";
 
-            if (options.PaintOfTheFirstPlayer == 'O')
+            PointHorizontal(
+                ref countOfZero, 
+                ref countOfCross, 
+                board);
+
+            PointVertical(
+                ref countOfZero,
+                ref countOfCross, 
+                board);
+
+            PointDiagonalRightLeft(
+                ref countOfZero, 
+                ref countOfCross, 
+                board);
+
+            PointDiagonalLeftRight(
+                ref countOfZero, 
+                ref countOfCross, 
+                board);
+        }
+        public static void WriteWhoIsAWinner(
+            int countOfCross, 
+            int countOfZero, 
+            Options options)
+        {
+            string botWinMessage = "Бот победил.";
+            string firstPlayerWin = "Первый игрок - победитель.";
+            string secondPlayerWin = "Второй игрок - победитель.";
+            string nobody = "Ничья.";
+
+            if ((options.PaintOfTheFirstPlayer == 'O' && countOfZero > countOfCross)
+                || (options.PaintOfTheFirstPlayer == 'X' && countOfCross > countOfZero))
             {
-                if (countOfZero > countOfCross)
-                {
-                    Console.WriteLine(FirstPlayerWin);
-                }
-                else if (countOfZero < countOfCross)
-                {
-                    if (options.TwoPlayers is false)
-                    {
-                        Console.WriteLine(BotWinMessage);
-                    }
-                    else
-                    {
-                        Console.WriteLine(SecondPlayerWin);
-                    }
-                }
-                else
-                {
-                    Console.WriteLine(Nobody);
-                }
+                Console.WriteLine(firstPlayerWin);
+            }
+            else if ((options.PaintOfTheSecondPlayer == 'O' && countOfZero > countOfCross && options.TwoPlayers is true)
+                || (options.PaintOfTheSecondPlayer == 'X' && countOfCross > countOfZero && options.TwoPlayers is true))
+            {
+                Console.WriteLine(secondPlayerWin);
+            }
+            else if ((options.PaintOfTheSecondPlayer == 'O' && countOfZero > countOfCross && options.TwoPlayers is false)
+                || (options.PaintOfTheSecondPlayer == 'X' && countOfCross > countOfZero && options.TwoPlayers is false))
+            {
+                Console.WriteLine(botWinMessage);
             }
             else
             {
-                if (countOfZero < countOfCross)
-                {
-                    Console.WriteLine(FirstPlayerWin);
-                }
-                else if (countOfZero > countOfCross)
-                {
-                    if (options.TwoPlayers is false)
-                    {
-                        Console.WriteLine(BotWinMessage);
-                    }
-                    else
-                    {
-                        Console.WriteLine(SecondPlayerWin);
-                    }
-                }
-                else
-                {
-                    Console.WriteLine(Nobody);
-                }
+                Console.WriteLine(nobody);
             }
         }
-        public static void PointHorizontal(ref int countOfZero, ref int countOfCross, char[,] board)
+        public static void PointHorizontal(
+            ref int countOfZero, 
+            ref int countOfCross, 
+            char[,] board)
         {
             int tempCountZero;
             int tempCountCross;
@@ -78,39 +78,39 @@ namespace Tic_Tac_Toe
                 tempCountCross = 0;
                 for (int j = 0; j < board.GetLength(0); j++)
                 {
-                    if (board[i, j] == 'O' && tempCountCross > 0)
+                    switch (board[i, j])
                     {
-                        tempCountCross = 0;
-                        tempCountZero++;
-                    }
-                    else if (board[i, j] == 'O' && tempCountZero == 2)
-                    {
-                        tempCountZero = 0;
-                        countOfZero++;
-                    }
-                    else if (board[i, j] == 'O')
-                    {
-                        tempCountZero++;
-                    }
-                    else if (board[i, j] == 'X' && tempCountZero > 0)
-                    {
-                        tempCountZero = 0;
-                        tempCountCross++;
-                    }
-                    else if (board[i, j] == 'X' && tempCountCross == 2)
-                    {
-                        tempCountCross = 0;
-                        countOfCross++;
-                    }
-                    else if (board[i, j] == 'X')
-                    {
-                        tempCountCross++;
+                        case 'O' when tempCountCross > 0:
+                            tempCountCross = 0;
+                            tempCountZero++;
+                            break;
+                        case 'O' when tempCountZero == 2:
+                            tempCountZero = 0;
+                            countOfZero++;
+                            break;
+                        case 'O':
+                            tempCountZero++;
+                            break;
+                        case 'X' when tempCountZero > 0:
+                            tempCountZero = 0;
+                            tempCountCross++;
+                            break;
+                        case 'X' when tempCountCross == 2:
+                            tempCountCross = 0;
+                            countOfCross++;
+                            break;
+                        case 'X':
+                            tempCountCross++;
+                            break;
                     }
                 }
             }
         }
 
-        public static void PointVertical(ref int countOfZero, ref int countOfCross, char[,] board)
+        public static void PointVertical(
+            ref int countOfZero, 
+            ref int countOfCross, 
+            char[,] board)
         {
             int tempCountZero;
             int tempCountCross;
@@ -120,39 +120,39 @@ namespace Tic_Tac_Toe
                 tempCountCross = 0;
                 for (int i = 0; i < board.GetLength(0); i++)
                 {
-                    if (board[i, j] == 'O' && tempCountCross > 0)
+                    switch (board[i, j])
                     {
-                        tempCountCross = 0;
-                        tempCountZero++;
-                    }
-                    else if (board[i, j] == 'O' && tempCountZero == 2)
-                    {
-                        tempCountZero = 0;
-                        countOfZero++;
-                    }
-                    else if (board[i, j] == 'O')
-                    {
-                        tempCountZero++;
-                    }
-                    else if (board[i, j] == 'X' && tempCountZero > 0)
-                    {
-                        tempCountZero = 0;
-                        tempCountCross++;
-                    }
-                    else if (board[i, j] == 'X' && tempCountCross == 2)
-                    {
-                        tempCountCross = 0;
-                        countOfCross++;
-                    }
-                    else if (board[i, j] == 'X')
-                    {
-                        tempCountCross++;
+                        case 'O' when tempCountCross > 0:
+                            tempCountCross = 0;
+                            tempCountZero++;
+                            break;
+                        case 'O' when tempCountZero == 2:
+                            tempCountZero = 0;
+                            countOfZero++;
+                            break;
+                        case 'O':
+                            tempCountZero++;
+                            break;
+                        case 'X' when tempCountZero > 0:
+                            tempCountZero = 0;
+                            tempCountCross++;
+                            break;
+                        case 'X' when tempCountCross == 2:
+                            tempCountCross = 0;
+                            countOfCross++;
+                            break;
+                        case 'X':
+                            tempCountCross++;
+                            break;
                     }
                 }
             }
         }
 
-        public static void PointDiagonalRightLeft(ref int countOfZero, ref int countOfCross, char[,] board)
+        public static void PointDiagonalRightLeft(
+            ref int countOfZero, 
+            ref int countOfCross, 
+            char[,] board)
         {
             int tempCountZero;
             int tempCountCross;
@@ -165,40 +165,40 @@ namespace Tic_Tac_Toe
                     int i = k - j;
                     if (i < board.GetLength(0) && j < board.GetLength(0))
                     {
-                        if (board[i, j] == 'O' && tempCountCross > 0)
+                        switch (board[i, j])
                         {
-                            tempCountCross = 0;
-                            tempCountZero++;
-                        }
-                        else if (board[i, j] == 'O' && tempCountZero == 2)
-                        {
-                            tempCountZero = 0;
-                            countOfZero++;
-                        }
-                        else if (board[i, j] == 'O')
-                        {
-                            tempCountZero++;
-                        }
-                        else if (board[i, j] == 'X' && tempCountZero > 0)
-                        {
-                            tempCountZero = 0;
-                            tempCountCross++;
-                        }
-                        else if (board[i, j] == 'X' && tempCountCross == 2)
-                        {
-                            tempCountCross = 0;
-                            countOfCross++;
-                        }
-                        else if (board[i, j] == 'X')
-                        {
-                            tempCountCross++;
+                            case 'O' when tempCountCross > 0:
+                                tempCountCross = 0;
+                                tempCountZero++;
+                                break;
+                            case 'O' when tempCountZero == 2:
+                                tempCountZero = 0;
+                                countOfZero++;
+                                break;
+                            case 'O':
+                                tempCountZero++;
+                                break;
+                            case 'X' when tempCountZero > 0:
+                                tempCountZero = 0;
+                                tempCountCross++;
+                                break;
+                            case 'X' when tempCountCross == 2:
+                                tempCountCross = 0;
+                                countOfCross++;
+                                break;
+                            case 'X':
+                                tempCountCross++;
+                                break;
                         }
                     }
                 }
 
             }
         }
-        public static void PointDiagonalLeftRight(ref int countOfZero, ref int countOfCross, char[,] board)
+        public static void PointDiagonalLeftRight(
+            ref int countOfZero, 
+            ref int countOfCross, 
+            char[,] board)
         {
             int tempCountZero;
             int tempCountCross;
@@ -210,33 +210,30 @@ namespace Tic_Tac_Toe
                 int x = board.GetLength(0) - 1 - i;
                 for (int y = 0; y <= i; y++)
                 {
-                    if (board[y, x] == 'O' && tempCountCross > 0)
+                    switch (board[y, x])
                     {
-                        tempCountCross = 0;
-                        tempCountZero++;
-                    }
-                    else if (board[y, x] == 'O' && tempCountZero == 2)
-                    {
-                        tempCountZero = 0;
-                        countOfZero++;
-                    }
-                    else if (board[y, x] == 'O')
-                    {
-                        tempCountZero++;
-                    }
-                    else if (board[y, x] == 'X' && tempCountZero > 0)
-                    {
-                        tempCountZero = 0;
-                        tempCountCross++;
-                    }
-                    else if (board[y, x] == 'X' && tempCountCross == 2)
-                    {
-                        tempCountCross = 0;
-                        countOfCross++;
-                    }
-                    else if (board[y, x] == 'X')
-                    {
-                        tempCountCross++;
+                        case 'O' when tempCountCross > 0:
+                            tempCountCross = 0;
+                            tempCountZero++;
+                            break;
+                        case 'O' when tempCountZero == 2:
+                            tempCountZero = 0;
+                            countOfZero++;
+                            break;
+                        case 'O':
+                            tempCountZero++;
+                            break;
+                        case 'X' when tempCountZero > 0:
+                            tempCountZero = 0;
+                            tempCountCross++;
+                            break;
+                        case 'X' when tempCountCross == 2:
+                            tempCountCross = 0;
+                            countOfCross++;
+                            break;
+                        case 'X':
+                            tempCountCross++;
+                            break;
                     }
                     x++;
                 }
@@ -249,33 +246,30 @@ namespace Tic_Tac_Toe
                 int x = board.GetLength(0) - 1 - i;
                 for (int y = 0; y <= i; y++)
                 {
-                    if (board[x, y] == 'O' && tempCountCross > 0)
+                    switch (board[x, y])
                     {
-                        tempCountCross = 0;
-                        tempCountZero++;
-                    }
-                    else if (board[x, y] == 'O' && tempCountZero == 2)
-                    {
-                        tempCountZero = 0;
-                        countOfZero++;
-                    }
-                    else if (board[x, y] == 'O')
-                    {
-                        tempCountZero++;
-                    }
-                    else if (board[x, y] == 'X' && tempCountZero > 0)
-                    {
-                        tempCountZero = 0;
-                        tempCountCross++;
-                    }
-                    else if (board[x, y] == 'X' && tempCountCross == 2)
-                    {
-                        tempCountCross = 0;
-                        countOfCross++;
-                    }
-                    else if (board[x, y] == 'X')
-                    {
-                        tempCountCross++;
+                        case 'O' when tempCountCross > 0:
+                            tempCountCross = 0;
+                            tempCountZero++;
+                            break;
+                        case 'O' when tempCountZero == 2:
+                            tempCountZero = 0;
+                            countOfZero++;
+                            break;
+                        case 'O':
+                            tempCountZero++;
+                            break;
+                        case 'X' when tempCountZero > 0:
+                            tempCountZero = 0;
+                            tempCountCross++;
+                            break;
+                        case 'X' when tempCountCross == 2:
+                            tempCountCross = 0;
+                            countOfCross++;
+                            break;
+                        case 'X':
+                            tempCountCross++;
+                            break;
                     }
                     x++;
                 }
