@@ -154,8 +154,8 @@ namespace Tic_Tac_Toe
                             { 
                                 x--;
                             }
-
                             break;
+
                         case ConsoleKey.RightArrow:
                             if (x < board.GetLength(0) - 1)
                             {

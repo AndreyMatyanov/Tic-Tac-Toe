@@ -84,21 +84,26 @@ namespace Tic_Tac_Toe
                             tempCountCross = 0;
                             tempCountZero++;
                             break;
+
                         case 'O' when tempCountZero == 2:
                             tempCountZero = 0;
                             countOfZero++;
                             break;
+
                         case 'O':
                             tempCountZero++;
                             break;
+
                         case 'X' when tempCountZero > 0:
                             tempCountZero = 0;
                             tempCountCross++;
                             break;
+
                         case 'X' when tempCountCross == 2:
                             tempCountCross = 0;
                             countOfCross++;
                             break;
+
                         case 'X':
                             tempCountCross++;
                             break;
@@ -126,21 +131,26 @@ namespace Tic_Tac_Toe
                             tempCountCross = 0;
                             tempCountZero++;
                             break;
+
                         case 'O' when tempCountZero == 2:
                             tempCountZero = 0;
                             countOfZero++;
                             break;
+
                         case 'O':
                             tempCountZero++;
                             break;
+
                         case 'X' when tempCountZero > 0:
                             tempCountZero = 0;
                             tempCountCross++;
                             break;
+
                         case 'X' when tempCountCross == 2:
                             tempCountCross = 0;
                             countOfCross++;
                             break;
+
                         case 'X':
                             tempCountCross++;
                             break;
@@ -171,21 +181,26 @@ namespace Tic_Tac_Toe
                                 tempCountCross = 0;
                                 tempCountZero++;
                                 break;
+
                             case 'O' when tempCountZero == 2:
                                 tempCountZero = 0;
                                 countOfZero++;
                                 break;
+
                             case 'O':
                                 tempCountZero++;
                                 break;
+
                             case 'X' when tempCountZero > 0:
                                 tempCountZero = 0;
                                 tempCountCross++;
                                 break;
+
                             case 'X' when tempCountCross == 2:
                                 tempCountCross = 0;
                                 countOfCross++;
                                 break;
+
                             case 'X':
                                 tempCountCross++;
                                 break;
@@ -216,21 +231,26 @@ namespace Tic_Tac_Toe
                             tempCountCross = 0;
                             tempCountZero++;
                             break;
+
                         case 'O' when tempCountZero == 2:
                             tempCountZero = 0;
                             countOfZero++;
                             break;
+
                         case 'O':
                             tempCountZero++;
                             break;
+
                         case 'X' when tempCountZero > 0:
                             tempCountZero = 0;
                             tempCountCross++;
                             break;
+
                         case 'X' when tempCountCross == 2:
                             tempCountCross = 0;
                             countOfCross++;
                             break;
+
                         case 'X':
                             tempCountCross++;
                             break;
@@ -252,21 +272,26 @@ namespace Tic_Tac_Toe
                             tempCountCross = 0;
                             tempCountZero++;
                             break;
+
                         case 'O' when tempCountZero == 2:
                             tempCountZero = 0;
                             countOfZero++;
                             break;
+
                         case 'O':
                             tempCountZero++;
                             break;
+
                         case 'X' when tempCountZero > 0:
                             tempCountZero = 0;
                             tempCountCross++;
                             break;
+
                         case 'X' when tempCountCross == 2:
                             tempCountCross = 0;
                             countOfCross++;
                             break;
+
                         case 'X':
                             tempCountCross++;
                             break;
